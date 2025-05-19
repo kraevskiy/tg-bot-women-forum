@@ -1,14 +1,13 @@
 import { Composer } from 'grammy';
 import { BotContext } from '../../types.js';
+import { keyboardMain } from '../../core/keyboards.js';
 import { TEXTS } from '../../helpers/texts.js';
-import { queryConstant } from '../../helpers/query.constant.js';
+import { commandConstant } from '../../helpers/command.constant.js';
 
 export const subscribe = new Composer<BotContext>();
 
-subscribe.callbackQuery(queryConstant.subscribe, async (ctx) => {
-	ctx.answerCallbackQuery();
+subscribe.command(commandConstant.subscribe, async (ctx: BotContext): Promise<void> => {
 	await ctx.reply(TEXTS.subscribeSuccess, {
 		parse_mode: 'HTML'
 	});
-	ctx.callbackQuery.message?.editReplyMarkup()
-})
+});
